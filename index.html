@@ -11,20 +11,21 @@
     <style type="text/css" media="screen">
       .container{position:relative;height:250px;}
       .box{position:absolute;top:50px;left:100px;height:100px;width:100px;border:3px
-        solid #F00;background:#F90;cursor:pointer;padding:5px;}
+        solid #999;cursor:pointer;padding:5px;}
     </style>
 
   </head>
   <body>
-    <div class="container">plain box with random position effect:
+    <div class="container">plain box with random-position effect:
       <div id="plain_box" class="box">plain box</div>
     </div>
 
-    <div class="container">plain box with random position effect and extended ...:
+    <div class="container">plain box with random-position effect and
+      extended background-color effect
       <div id="extended_box" class="box">extended box</div>
     </div>
 
-    <div class="container">plain box with random position effect and ...:
+    <div class="container">plain box with random-position effect and ...:
       <div id="box_with_aspect" class="box">box with aspect</div>
     </div>
 
@@ -33,7 +34,7 @@
       new Box('plain_box');
 
       // create extended box
-      //new ExtendedBox('extended_box');
+      new ExtendedBox('extended_box');
 
       // create box with aspect
       new Box('box_with_aspect');

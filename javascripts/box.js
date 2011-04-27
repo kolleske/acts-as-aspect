@@ -11,10 +11,10 @@ Box.prototype = {
 	},
 
 	setObservers: function() {
-		Event.observe(this.element, 'click', this.onClick.bindAsEventListener(this));
+		Event.observe(this.element, 'click', this.setNewPosition.bindAsEventListener(this));
 	},
 
-	onClick: function(event) {
+	setNewPosition: function(event) {
 		var element = Event.element(event);
 		element.setStyle({
 			top: this.options.top(100) + 'px',
