@@ -11,6 +11,7 @@
     <style type="text/css" media="screen">
       .container{position:relative;height:250px;}
       .box{position:absolute;top:50px;left:100px;height:100px;width:100px;border:3px solid #999;cursor:pointer;padding:5px;}
+      pre{background:#EEE;margin-left:300px;}
     </style>
 
   </head>
@@ -23,7 +24,18 @@
       <div id="extended_box" class="box">extended box</div>
     </div>
 
-    <div class="container">plain box with random-position effect and background-color effect added as aspect:
+    <div class="container">plain box with random-position effect and background-color effect added as after advice:
+      <pre><code>
+      // add after advice to box_with_aspect
+      actsAsAspect(Box.prototype);
+      Box.prototype.after('setNewPosition', function() {
+        var color = function(){ return Math.round(Math.random() * 255) };
+        this.element.setStyle({
+          background: 'rgba(' + color() + ',' + color() + ',' + color() + ',0.4)'
+        });
+      });
+      new Box('box_with_aspect')
+      </code></pre>
       <div id="box_with_aspect" class="box">box with aspect</div>
     </div>
 
