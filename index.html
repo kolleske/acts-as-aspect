@@ -5,13 +5,12 @@
     <title>acts-as-aspect in javascript</title>
 
     <script src="javascripts/prototype.js" type="text/javascript"></script>
+    <script src="javascripts/acts-as-aspect.js" type="text/javascript"></script>
     <script src="javascripts/box.js" type="text/javascript"></script>
-    <script src="javascripts/extend.js" type="text/javascript"></script>
 
     <style type="text/css" media="screen">
       .container{position:relative;height:250px;}
-      .box{position:absolute;top:50px;left:100px;height:100px;width:100px;border:3px
-        solid #999;cursor:pointer;padding:5px;}
+      .box{position:absolute;top:50px;left:100px;height:100px;width:100px;border:3px solid #999;cursor:pointer;padding:5px;}
     </style>
 
   </head>
@@ -20,25 +19,31 @@
       <div id="plain_box" class="box">plain box</div>
     </div>
 
-    <div class="container">plain box with random-position effect and
-      extended background-color effect
+    <div class="container">plain box with random-position effect and extended background-color effect
       <div id="extended_box" class="box">extended box</div>
     </div>
 
-    <div class="container">plain box with random-position effect and ...:
+    <div class="container">plain box with random-position effect and background-color effect added as aspect:
       <div id="box_with_aspect" class="box">box with aspect</div>
     </div>
 
     <script type="text/javascript">
-      // create plain box
+      // add functionality to plain box
       new Box('plain_box');
 
-      // create extended box
+      // add functionality to extended box
       new ExtendedBox('extended_box');
 
-      // create box with aspect
-      new Box('box_with_aspect');
-  
-      </script>
+      // add after advice to box_with_aspect
+      actsAsAspect(Box.prototype);
+      Box.prototype.after('setNewPosition', function() {
+        var color = function(){ return Math.round(Math.random() * 255) };
+        this.element.setStyle({
+          background: 'rgba(' + color() + ',' + color() + ',' + color() + ',0.4)'
+        });
+      });
+      new Box('box_with_aspect')
+
+    </script>
   </body>
 </html>
